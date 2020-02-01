@@ -1,0 +1,123 @@
+{% extends 'books/base.html' %}
+
+
+{% block title %}Internet Book Database {% endblock %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/animate.css' %}">
+
+
+    <header>
+        {#        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">#}
+        {#            <div class="container">#}
+        {#                <a class="navbar-brand" href="#"><strong>IBDB</strong></a>#}
+        {#                <button class="navbar-toggler" type="button" data-toggle="collapse"#}
+        {#                        data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"#}
+        {#                        aria-expanded="false" aria-label="Toggle navigation">#}
+        {#                    <span class="navbar-toggler-icon"></span>#}
+        {#                </button>#}
+        {#                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">#}
+        {#                    <ul class="navbar-nav mr-auto">#}
+        {#                        <li class="nav-item active">#}
+        {#                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
+        {#                        </li>#}
+        {#                        <li class="nav-item">#}
+        {#                            <a class="nav-link" href="#">Top</a>#}
+        {#                        </li>#}
+        {#                        <li class="nav-item">#}
+        {#                            <a class="nav-link" href="#">Profile</a>#}
+        {#                        </li>#}
+        {#                    </ul>#}
+        {#                    <form class="form-inline">#}
+        {#                        <div class="md-form my-0">#}
+        {#                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">#}
+        {#                        </div>#}
+        {#                    </form>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </nav>#}
+
+        <div class="view d-flex align-items-center justify-content-center"
+             style="background-image: url('{% static 'books/images/background.jpg' %}'); background-repeat:no-repeat;
+                     background-size:cover; background-position: center center; filter:grayscale(100%);">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 mb-4 white-text text-center">
+                        <h1 class="h1-responsive text-light text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 animated fadeInDown"
+                        "><strong>Internet Book Database</strong> {{ num_visits }}</h1>
+                        <hr class="hr-light my-4 animated fadeInDown">
+                        <h5 class="text-uppercase mb-4 text-light animated fadeInDown delay-1s"><strong>Some
+                            books</strong></stron></h5>
+                        <a href="{% url 'topbook-list' %}"
+                           class="btn btn-outline-light animated fadeInDown text-light">Top
+                            books</a>
+                        <a href="{% url 'onebook-detail' random %}"
+                           class="btn btn-outline-light animated fadeInDown text-light">Random
+                            book</a>
+                    </div>
+                </div>
+
+                {#                <div class="row">#}
+                {#                    <div class="col-md-12 text-center">#}
+                {#                        <h1 class="text-light text-uppercase font-weight-bold">#}
+                {#                            TOP 3 BOOKS#}
+                {#                        </h1>#}
+                {#                    </div>#}
+                {#                    <div class="col-md-12 text-center">#}
+                {#                        <i class="fas fa-chevron-down text-light animated pulse delay-1s infinite"#}
+                {#                           style="font-size:60px; cursor:pointer;"></i>#}
+                {#                    </div>#}
+                {#                </div>#}
+
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="container">
+            {% for i in books %}
+                {% if forloop.counter == 2 %}
+                    <div class="row p-5">
+                {% else %}
+                    <div class="row p-5 d-flex flex-row-reverse">
+                {% endif %}
+            <div data-aos="fade-right" class="col-md-6 text-center">
+                <a href="{% url 'onebook-detail' i.id %}">
+                    <img
+                            style="border-left: 7px solid {{ colors|get_item:forloop.counter0 }};"
+                            class="img-fluid cover"
+
+                            {% if '//' in i.cover_picture %}
+                            src="{{ i.cover_picture }}"
+                            {% else %}
+                            src="{% static 'books/images/book_covers/'|add:i.cover_picture %}"
+                            {% endif %}
+                    >
+                </a>
+            </div>
+            <div data-aos="fade-left" class="col-md-6 text-center align-self-center">
+                <h2 class="text-uppercase font-weight-bold">{{ i.title }}</h2>
+                <h1 class="book-author text-uppercase font-weight-bold">{{ i.author }}</h1>
+                <h5>
+                    {% for k in i.number_of_stars|make_list %}
+                        <i class="far fa-star" style="cursor:pointer"></i>
+                    {% endfor %}
+                    {% if i.half_of_star %}
+                        <i class="far fa-star-half" style="cursor:pointer"></i>
+                    {% endif %}
+                </h5>
+            </div>
+            </div>
+            {% endfor %}
+            </div>
+    </main>
+{% endblock %}
+
+
+
+
+
+
+

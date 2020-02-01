@@ -1,0 +1,29 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+    {% for i in books %}
+
+        <span>{{ i }} {{ i.id }}</span>
+
+        <form action="edit" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type='hidden' value='{{ i.pk }}' name='pk'>
+            <input type="submit" value="Submit" class="btn btn-primary">
+            <input type="submit" name="remove" value="Remove" class="btn btn-danger">
+
+        </form>
+
+    {% endfor %}
+
+    <form action="create/" method="post">
+    {% csrf_token %}
+        <p>Add:</p>
+    <label for="ftitle">Title</label>
+    <input id="ftitle" type="text" name="ftitle" value="">
+    <label for="fauthor">Author</label>
+    <input id="fauthor" type="text" name="fauthor" value="">
+
+    <input type="submit" value="Add" class="btn btn-success">
+</form>
+{% endblock %}

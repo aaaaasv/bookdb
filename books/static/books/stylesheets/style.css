@@ -1,0 +1,74 @@
+html,
+body,
+header,
+.view {
+    height: 100%;
+    width:100%;
+    margin:0;
+    padding:0;
+}
+
+.container,
+.container-fluid {
+    width:100%;
+}
+@media (max-width: 740px) {
+    html,
+    body,
+    header,
+    .view {
+        height: 100vh;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    .book-author {
+        font-size: 25px;
+        letter-spacing: 3px;
+    }
+}
+
+/*.top-nav-collapse {*/
+/*    background-color: #78909c !important;*/
+/*}*/
+
+
+/*.navbar:not(.top-nav-collapse) {*/
+/*    background: transparent !important;*/
+/*}*/
+
+/*@media (max-width: 991px) {*/
+/*    .navbar:not(.top-nav-collapse) {*/
+/*        background: #78909c !important;*/
+/*    }*/
+/*}*/
+
+h1 {
+    letter-spacing: 8px;
+}
+
+h5 {
+    letter-spacing: 3px;
+}
+
+.hr-light {
+    border-top: 3px solid #fff;
+    width: 90px;
+}
+
+
+.cover {
+    max-width: 33%;
+    filter: grayscale(100%) drop-shadow(8px 8px 10px gray);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.cover:hover {
+    filter: grayscale(0%) drop-shadow(8px 8px 10px gray);
+}
