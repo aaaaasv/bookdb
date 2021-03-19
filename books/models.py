@@ -13,9 +13,7 @@ class Author(models.Model):
         ordering = ['name']
 
 
-
 class Book(models.Model):
-
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     pub_year = models.IntegerField(default=0)
@@ -64,12 +62,17 @@ class Book(models.Model):
 
 
 class Rate(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     score = models.IntegerField(default=0)
 
-    class Meta:
-        unique_together = [
-            ('user', 'book'),
-        ]
+    # class Meta:
+    #     unique_together = [
+    #         ('user', 'book'),
+    #     ]
+
+    def __str__(self):
+        return "%s : %s(%s)" % (self.user, self.book.title, self.score)

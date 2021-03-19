@@ -1,5 +1,7 @@
 {% extends 'books/base.html' %}
 {% block title %} IBDB Rating {% endblock %}
+    {% block navbar-color %}light{% endblock navbar-color %}
+
 {% block content %}
     {% load static %}
     {% load custom_tags %}
@@ -9,17 +11,20 @@
     <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/list_style.css' %}">
     <div class="d-flex flex-column align-items-center justify-content-between h-100">
 
-        <div class="row">
+
+        <div class="container d-flex flex-column align-items-center h-100 mt-5">
+                   <div class="row">
             <div class="col-md-12">
                 <h1>Top Rated Books {{ num_visits }}</h1>
                 <h6 class="text-muted">Showing {{ count }} Titles</h6>
 
             </div>
         </div>
-        <div class="container d-flex flex-column align-items-center">
             {% for book in object_list %}
                 <div class="card col-10 col-md-12"
-                     style="margin:0.5rem; border-color:{{ colors|get_item:forloop.counter0 }}; border-width:thin;">
+                     style="margin:0.5rem;
+                             border-color:{{ colors|get_item:forloop.counter0 }};
+                             border-width:thin;">
                     <div class="card-body">
 
                         <div class="row no-gutters d-flex">
@@ -71,7 +76,7 @@
                     </div>
                 </div>
             {% empty %}
-                <p>No books yet.</p>
+                <p>No books found for your request <b>"{{ search_text }}"</b>.</p>
             {% endfor %}
 
         </div>

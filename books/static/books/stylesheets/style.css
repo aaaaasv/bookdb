@@ -1,5 +1,7 @@
-html,
-body,
+html, body {
+    height:100%;
+}
+
 header,
 .view {
     height: 100%;
@@ -8,10 +10,6 @@ header,
     padding:0;
 }
 
-.container,
-.container-fluid {
-    width:100%;
-}
 @media (max-width: 740px) {
     html,
     body,
@@ -29,7 +27,6 @@ header,
 
     .book-author {
         font-size: 25px;
-        letter-spacing: 3px;
     }
 }
 
@@ -48,13 +45,6 @@ header,
 /*    }*/
 /*}*/
 
-h1 {
-    letter-spacing: 8px;
-}
-
-h5 {
-    letter-spacing: 3px;
-}
 
 .hr-light {
     border-top: 3px solid #fff;
