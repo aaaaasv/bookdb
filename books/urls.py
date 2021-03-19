@@ -13,12 +13,12 @@ router.register(
     viewset=views.BookViewSet
 )
 
-# app_name = 'book'
+app_name = 'books'
 urlpatterns = [
     path('', views.startpage, name='start-page'),
     path('edit', views.edit),
     path('create/', views.create),
-    path('top/', views.TopListView, name='topbook-list'),
+    path('top/', views.TopListView, name='book-list'),
     path('book/<int:pk>/', views.BookDetailView.as_view(), name='onebook-detail'),
     path('author/<int:pk>/', views.AuthorDetailView.as_view(), name='author-detail'),
     path('upd/', views.update_rating, name='upd'),

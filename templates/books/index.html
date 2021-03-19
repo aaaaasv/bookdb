@@ -6,78 +6,38 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'books/fonts/stretch/stylesheet.css' %}">
 
+    <div class="container-fluid">
+    <div class="row" style="height:50vh;">
+        <div class="col-sm-12 section-top-img">
+            <img src="{% static 'books/images/book-info.svg' %}" alt="" style="pointer-events: none">
 
-    <header>
-        {#        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">#}
-        {#            <div class="container">#}
-        {#                <a class="navbar-brand" href="#"><strong>IBDB</strong></a>#}
-        {#                <button class="navbar-toggler" type="button" data-toggle="collapse"#}
-        {#                        data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"#}
-        {#                        aria-expanded="false" aria-label="Toggle navigation">#}
-        {#                    <span class="navbar-toggler-icon"></span>#}
-        {#                </button>#}
-        {#                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">#}
-        {#                    <ul class="navbar-nav mr-auto">#}
-        {#                        <li class="nav-item active">#}
-        {#                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
-        {#                        </li>#}
-        {#                        <li class="nav-item">#}
-        {#                            <a class="nav-link" href="#">Top</a>#}
-        {#                        </li>#}
-        {#                        <li class="nav-item">#}
-        {#                            <a class="nav-link" href="#">Profile</a>#}
-        {#                        </li>#}
-        {#                    </ul>#}
-        {#                    <form class="form-inline">#}
-        {#                        <div class="md-form my-0">#}
-        {#                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">#}
-        {#                        </div>#}
-        {#                    </form>#}
-        {#                </div>#}
-        {#            </div>#}
-        {#        </nav>#}
-
-        <div class="view d-flex align-items-center justify-content-center"
-             style="background-image: url('{% static 'books/images/background.jpg' %}'); background-repeat:no-repeat;
-                     background-size:cover; background-position: center center; filter:grayscale(100%);">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 mb-4 white-text text-center">
-                        {#                        {{ num_visits }}#}
-                        <h1 class="h1-responsive text-light text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 animated fadeInDown"
-                        "><strong>Internet Book Database</strong> </h1>
-                        <hr class="hr-light my-4 animated fadeInDown">
-                        <h5 class="text-uppercase mb-4 text-light animated fadeInDown delay-1s"><strong>Some
-                            books</strong></stron></h5>
-                        <a href="{% url 'topbook-list' %}"
-                           class="btn btn-outline-light animated fadeInDown text-light">Top
-                            books</a>
-                        <a href="{% url 'onebook-detail' random %}"
-                           class="btn btn-outline-light animated fadeInDown text-light">Random
-                            book</a>
-                    </div>
-                </div>
-
-                {#                <div class="row">#}
-                {#                    <div class="col-md-12 text-center">#}
-                {#                        <h1 class="text-light text-uppercase font-weight-bold">#}
-                {#                            TOP 3 BOOKS#}
-                {#                        </h1>#}
-                {#                    </div>#}
-                {#                    <div class="col-md-12 text-center">#}
-                {#                        <i class="fas fa-chevron-down text-light animated pulse delay-1s infinite"#}
-                {#                           style="font-size:60px; cursor:pointer;"></i>#}
-                {#                    </div>#}
-                {#                </div>#}
-
-            </div>
         </div>
-
-    </header>
-
-    <main>
-        <div class="container">
+    </div>
+    <div class="row" style="height:50vh;">
+        <div class="col-sm-12 section-top d-flex justify-content-start pt-5 align-items-center flex-column">
+            <p class="main-title">INTERNET BOOK DATABASE</p>
+            <p class="main-subtitle">find your new favourite book</p>
+            <form class="main-search d-flex justify-content-center align-items-center" method="get" action="{% url 'books:book-list' %}">
+                <div class="search-input-container">
+                    <input class="input-find" placeholder="Search" name="search-text" type="search" id="searchbar">
+                    <div class="suggestion" id="search-suggestion">Suggestion</div>
+                </div>
+                <button class="btn-find" type="submit">
+                    Find books
+                </button>
+            </form>
+            <img src="{% static 'books/images/logo-left.svg' %}" alt="" class="logo-left">
+            <a class="list-all-books d-flex justify-content-center align-items-center"
+               href="{% url 'books:book-list' %}">
+                <span class="text-all-books">All books</span>
+                <span class="material-icons-outlined material-icons icon-all-books">arrow_forward_ios</span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
             {% for i in books %}
                 {% if forloop.counter == 2 %}
                     <div class="row p-5">
@@ -85,7 +45,7 @@
                     <div class="row p-5 d-flex flex-row-reverse">
                 {% endif %}
             <div data-aos="fade-right" class="col-md-6 text-center">
-                <a href="{% url 'onebook-detail' i.id %}">
+                <a href="{% url 'books:onebook-detail' i.id %}">
                     <img
                             style="border-left: 7px solid {{ colors|get_item:forloop.counter0 }};"
                             class="img-fluid cover"
@@ -113,7 +73,8 @@
             </div>
             {% endfor %}
             </div>
-    </main>
+        </div>
+    </div>
 {% endblock %}
 
 

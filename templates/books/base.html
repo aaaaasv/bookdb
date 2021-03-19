@@ -10,82 +10,85 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/598e0465f9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <link rel="stylesheet" href="{% static 'books/stylesheets/style.css' %}"/>
 
 </head>
 <body>
 <style>
-    .placeholder
-{
-    position: relative;
-}
+    .placeholder {
+        position: relative;
+    }
 
-.placeholder::after
-{
-    position: absolute;
-    left: 13px;
-    top: 0;
-    bottom:0;
-    {#margin-top:auto;#}
-    {#margin-bottom:auto;#}
-    margin-bottom:-1px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    content: attr(data-placeholder);
-    pointer-events: none;
-    opacity: 0.6;
-}
+    .placeholder::after {
+        position: absolute;
+        left: 13px;
+        top: 0;
+        bottom: 0;
+    {#margin-top:auto;#}{#margin-bottom:auto;#} margin-bottom: -1px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        content: attr(data-placeholder);
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
+    body {
+        font-family: Open Sans;
+        font-style: normal;
+    }
 </style>
 {% block navbar %}
-    <nav class="navbar fixed-top navbar-expand-lg navbar-{% block navbar-color %}dark{% endblock navbar-color %}">
-        <a href="{% url 'start-page' %}" class="navbar-brand">IBDB</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a href="{% url 'start-page' %}" class="nav-link">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'topbook-list' %}" class="nav-link">
-                        Top
-                    </a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">|</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="#" class="nav-link">
-                            {{ user.username }}
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{% url 'logout' %}" class="nav-link">Log out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a href="{% url 'login' %}" class="nav-link">Log in</a>
-                    </li>
-
-                {% endif %}
-
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'topbook-list' %}">
-<div class="placeholder" data-placeholder="Search" id="searchbar-placeholder">
-                    <input name="search-text" type="search"  class="form-control mr-sm-2"
-                           id="searchbar">
-</div>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+    {#    <nav class="navbar fixed-top navbar-expand-lg navbar-{% block navbar-color %}dark{% endblock navbar-color %}">#}
+    {#        <a href="{% url 'start-page' %}" class="navbar-brand">IBDB</a>#}
+    {#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"#}
+    {#                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">#}
+    {#            <span class="navbar-toggler-icon"></span>#}
+    {#        </button>#}
+    {##}
+    {#        <div class="collapse navbar-collapse" id="navbarToggler">#}
+    {#            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">#}
+    {#                <li class="nav-item active">#}
+    {#                    <a href="{% url 'start-page' %}" class="nav-link">Home <span class="sr-only">(current)</span></a>#}
+    {#                </li>#}
+    {#                <li class="nav-item">#}
+    {#                    <a href="{% url 'topbook-list' %}" class="nav-link">#}
+    {#                        Top#}
+    {#                    </a>#}
+    {#                </li>#}
+    {#                {% if user.is_authenticated %}#}
+    {#                    <li class="nav-item">#}
+    {#                        <a href="#" class="nav-link">|</a>#}
+    {#                    </li>#}
+    {#                    <li class="nav-item ">#}
+    {#                        <a href="#" class="nav-link">#}
+    {#                            {{ user.username }}#}
+    {#                        </a>#}
+    {#                    </li>#}
+    {##}
+    {#                    <li class="nav-item">#}
+    {#                        <a href="{% url 'logout' %}" class="nav-link">Log out</a>#}
+    {#                    </li>#}
+    {#                {% else %}#}
+    {#                    <li class="nav-item">#}
+    {#                        <a href="{% url 'login' %}" class="nav-link">Log in</a>#}
+    {#                    </li>#}
+    {##}
+    {#                {% endif %}#}
+    {##}
+    {#            </ul>#}
+    {##}
+    {#            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'topbook-list' %}">#}
+    {#<div class="placeholder" data-placeholder="Search" id="searchbar-placeholder">#}
+    {#                    <input name="search-text" type="search"  class="form-control mr-sm-2"#}
+    {#                           id="searchbar">#}
+    {#</div>#}
+    {#                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+    {#            </form>#}
+    {#        </div>#}
+    {#    </nav>#}
 {% endblock %}
 {% block content %}
 
@@ -109,25 +112,35 @@
     AOS.init();
 </script>
 <script>
-    $('#searchbar').keyup(function () {
+    $('#searchbar').on('keyup', function () {
         $.ajax({
-            url: {% url 'book-suggest' %},
+            url: {% url 'books:book-suggest' %},
             type: 'GET',
             data: {
                 search_text: $('#searchbar').val()
             },
-            dataType: 'json', // added data type
+            dataType: 'json',
             success: function (res) {
                 if ('completed' in res) {
-                    $('#searchbar-placeholder').attr("data-placeholder", res.completed);
+                    $('#search-suggestion').text(res.completed);
+                    $('#search-suggestion').show()
                     console.log(res.completed)
+                } else {
+                    $('#search-suggestion').hide()
+                    $('#search-suggestion').attr('');
+                    console.log('no completed in res')
                 }
-                else {
-                    $('#searchbar-placeholder').attr("data-placeholder", '');
-
-                }
+            },
+            error: function (e) {
+                console.log("error")
+                $('#searchbar-placeholder').hide()
+                $('#searchbar-placeholder').attr('');
             }
         });
+    })
+    $('#search-suggestion').on('click', function() {
+        $('#searchbar').val($(this).text())
+        $(this).hide()
     })
 </script>
 </body>

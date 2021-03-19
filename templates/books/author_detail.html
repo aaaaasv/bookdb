@@ -23,7 +23,7 @@
                 <ul class="list-group">
                     {% for i in books %}
                         <li class="list-group-item">
-                            <p><a href="{% url 'onebook-detail' i.id %}">{{ i.title }} - {{ i.rated_or_not }}</a></p>
+                            <p><a href="{% url 'books:onebook-detail' i.id %}">{{ i.title }} - {{ i.rated_or_not }}</a></p>
                         </li>
                     {% endfor %}
                 </ul>

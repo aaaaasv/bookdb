@@ -32,7 +32,7 @@
                             <div class="col-8 col-md-10">
                                 <div class="row">
                                     <div class="col-md-2 book_cover">
-                                        <a href="{% url 'onebook-detail' book.id %}">
+                                        <a href="{% url 'books:onebook-detail' book.id %}">
                                             <img class="mx-0 px-0"
                                                     {% if '//' in book.cover_picture %}
                                                  src="{{ book.cover_picture }}"
@@ -44,11 +44,11 @@
                                     </div>
                                     <div class="col-12 col-md-6 book_main_info">
                                         <h5 class="card-title">
-                                            <a href="{% url 'onebook-detail' book.id %}">{{ forloop.counter }}. {{ book.title }}</a>
+                                            <a href="{% url 'books:onebook-detail' book.id %}">{{ forloop.counter }}. {{ book.title }}</a>
                                         </h5>
                                         <h6 class="card-subtitle mb-2 text-muted ">
                                             <a class="author_title"
-                                               href="{% url 'author-detail' pk=book.author.id %}">{{ book.author }}</a>
+                                               href="{% url 'books:author-detail' pk=book.author.id %}">{{ book.author }}</a>
                                         </h6>
                                         {% if book.pub_year != 0 %}
                                             <h6 class="text-muted year">{{ book.pub_year }}</h6>

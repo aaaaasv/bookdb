@@ -1,13 +1,21 @@
-html, body {
-    height:100%;
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-header,
-.view {
-    height: 100%;
-    width:100%;
-    margin:0;
-    padding:0;
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #FFC700;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #d7a700;
 }
 
 @media (max-width: 740px) {
@@ -30,28 +38,6 @@ header,
     }
 }
 
-/*.top-nav-collapse {*/
-/*    background-color: #78909c !important;*/
-/*}*/
-
-
-/*.navbar:not(.top-nav-collapse) {*/
-/*    background: transparent !important;*/
-/*}*/
-
-/*@media (max-width: 991px) {*/
-/*    .navbar:not(.top-nav-collapse) {*/
-/*        background: #78909c !important;*/
-/*    }*/
-/*}*/
-
-
-.hr-light {
-    border-top: 3px solid #fff;
-    width: 90px;
-}
-
-
 .cover {
     max-width: 33%;
     filter: grayscale(100%) drop-shadow(8px 8px 10px gray);
@@ -61,4 +47,143 @@ header,
 
 .cover:hover {
     filter: grayscale(0%) drop-shadow(8px 8px 10px gray);
+}
+
+.container-fluid {
+    overflow-x: hidden;
+}
+
+.section-top-img img {
+    width: 80%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -23%;
+    z-index: -1;
+    transform: rotate(17deg);
+}
+
+.section-top * {
+    margin-top: 15px;
+}
+
+.main-title {
+    color: black;
+    font-family: 'Stretch Pro';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 50px;
+}
+
+.main-subtitle {
+    font-weight: 800;
+    color: #FFC700;
+    font-size: 25px;
+}
+
+.main-search {
+    position: relative;
+}
+
+.btn-find {
+    font-weight: normal;
+    font-size: 15px;
+    width: 150px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 100px;
+    background: white;
+    position: relative;
+    z-index: 10;
+    transition: .2s;
+}
+
+.search-input-container {
+    position: absolute;
+    right: 70%;
+    margin: 0;
+}
+
+.search-input-container .suggestion {
+    position: absolute;
+    /*border: 1px solid #5C5C5C;*/
+    width: 80%;
+    border-radius: 50px;
+    padding: 5px 15px 5px 20px;
+    display: none;
+    font-size: 13px;
+    margin-left: 5px;
+    margin-top: -3px;
+    cursor: pointer;
+    background-color: #FFC700;
+    color: white;
+    font-weight: bold;
+    z-index:2;
+}
+
+.input-find {
+    border-radius: 100px;
+    background: white;
+    font-size: 12px;
+    border: 1px solid #5C5C5C;
+    z-index: 5;
+    height: 35px;
+    width: 200px;
+    padding-right: 15px;
+    padding-left: 20px;
+    color: black;
+}
+
+.input-find::placeholder {
+    color: #D2D2D2;
+
+}
+
+.btn-find:focus {
+    outline: none;
+    border-width: 3px;
+}
+
+.btn-find:hover {
+    background-color: #FFC700;
+    color: white;
+    border-color: #FFC700;
+}
+
+.input-find:focus {
+    outline: none;
+    border-width: 2px;
+}
+
+.logo-left {
+    position: fixed;
+    left: 0;
+    bottom: 10%;
+    margin-left: -15px;
+    cursor: pointer;
+    transition: .5s;
+    z-index: 500;
+}
+
+.logo-left:hover {
+    margin-left: 0;
+}
+
+.list-all-books {
+    color: #FFC700;
+    font-weight: 800;
+    font-size: 20px;
+    position: absolute;
+    right: 30px;
+    bottom: 50px;
+}
+
+.list-all-books:hover {
+    text-decoration: none;
+    color: #FFC700;
+}
+
+.list-all-books .text-all-books:hover {
+    text-decoration: underline;
 }
