@@ -28,7 +28,7 @@ class BookDocumentSerializer(DocumentSerializer):
             'title',
             'author',
             'pub_year',
-            'cover_picture',
+            'cover',
             'rating',
             'rating_sum',
             'rating_voters_number'

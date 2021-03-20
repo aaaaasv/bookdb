@@ -19,7 +19,8 @@
         <div class="col-sm-12 section-top d-flex justify-content-start pt-5 align-items-center flex-column">
             <p class="main-title">INTERNET BOOK DATABASE</p>
             <p class="main-subtitle">find your new favourite book</p>
-            <form class="main-search d-flex justify-content-center align-items-center" method="get" action="{% url 'books:book-list' %}">
+            <form class="main-search d-flex justify-content-center align-items-center" method="get"
+                  action="{% url 'books:book-list' %}">
                 <div class="search-input-container">
                     <input class="input-find" placeholder="Search" name="search-text" type="search" id="searchbar">
                     <div class="suggestion" id="search-suggestion">Suggestion</div>
@@ -28,7 +29,9 @@
                     Find books
                 </button>
             </form>
-            <img src="{% static 'books/images/logo-left.svg' %}" alt="" class="logo-left">
+            <object type="image/svg+xml" data="{% static 'books/images/logo-left.svg' %}" class="logo-left">
+            </object>
+            {#            <img src="{% static 'books/images/logo-left.svg' %}" alt="" class="logo-left">#}
             <a class="list-all-books d-flex justify-content-center align-items-center"
                href="{% url 'books:book-list' %}">
                 <span class="text-all-books">All books</span>
@@ -50,24 +53,23 @@
                             style="border-left: 7px solid {{ colors|get_item:forloop.counter0 }};"
                             class="img-fluid cover"
 
-                            {% if '//' in i.cover_picture %}
-                            src="{{ i.cover_picture }}"
-                            {% else %}
-                            src="{% static 'books/images/book_covers/'|add:i.cover_picture %}"
-                            {% endif %}
-                    >
+{#                            {% if '//' in i.cover_picture %}#}
+{#                            src="{{ i.cover_picture }}"#}
+{#                            {% else %}#}
+{#                            src="{% static 'books/images/book_covers/'|add:i.cover_picture %}"#}
+{#                            {% endif %}#}>
                 </a>
             </div>
             <div data-aos="fade-left" class="col-md-6 text-center align-self-center">
                 <h2 class="text-uppercase font-weight-bold">{{ i.title }}</h2>
                 <h1 class="book-author text-uppercase font-weight-bold">{{ i.author }}</h1>
                 <h5>
-                    {% for k in i.number_of_stars|make_list %}
-                        <i class="far fa-star" style="cursor:pointer"></i>
-                    {% endfor %}
-                    {% if i.half_of_star %}
-                        <i class="far fa-star-half" style="cursor:pointer"></i>
-                    {% endif %}
+{#                    {% for k in i.number_of_stars|make_list %}#}
+{#                        <i class="far fa-star" style="cursor:pointer"></i>#}
+{#                    {% endfor %}#}
+{#                    {% if i.half_of_star %}#}
+{#                        <i class="far fa-star-half" style="cursor:pointer"></i>#}
+{#                    {% endif %}#}
                 </h5>
             </div>
             </div>

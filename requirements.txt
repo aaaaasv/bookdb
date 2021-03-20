@@ -19,3 +19,4 @@ urllib3==1.25.10
 wrapt==1.12.1
 django-elasticsearch-dsl
 django-elasticsearch-dsl-drf
+pillow

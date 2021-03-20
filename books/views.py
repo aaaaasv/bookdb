@@ -21,15 +21,12 @@ color_dictionary = {0: '#AF9500;', 1: '#B4B4B4', 2: '#AD8A56'}  # gold, silver a
 
 
 def startpage(request):
-    num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits + 1
-    # print(Book.objects.all().values_list('rating', flat=True))
-    random_book_id = random.choice(range(1, len(Book.objects.all()) - 1))
+    # random_book_id = random.choice(range(1, len(Book.objects.all()) - 1))
     p = Book.objects.order_by('-rating')[:3]
     return render(request, 'books/index.html', {'books': p,
-                                                'random': random_book_id,
-                                                'colors': color_dictionary,
-                                                'num_visits': num_visits})
+                                                # 'random': random_book_id,
+                                                'colors': color_dictionary
+                                                })
 
 
 def create(request):

@@ -88,15 +88,16 @@
 
 .btn-find {
     font-weight: normal;
-    font-size: 15px;
-    width: 150px;
-    height: 40px;
-    border: 2px solid black;
+    font-size: 16px;
+    width: 180px;
+    height: 50px;
     border-radius: 100px;
-    background: white;
     position: relative;
     z-index: 10;
-    transition: .2s;
+    transition: .5s;
+    background-color: #FFC700;
+    color: white;
+    border: 1px solid #FFC700;
 }
 
 .search-input-container {
@@ -119,17 +120,17 @@
     background-color: #FFC700;
     color: white;
     font-weight: bold;
-    z-index:2;
+    z-index: 2;
 }
 
 .input-find {
     border-radius: 100px;
     background: white;
-    font-size: 12px;
+    font-size: 14px;
     border: 1px solid #5C5C5C;
     z-index: 5;
-    height: 35px;
-    width: 200px;
+    height: 40px;
+    width: 220px;
     padding-right: 15px;
     padding-left: 20px;
     color: black;
@@ -137,7 +138,6 @@
 
 .input-find::placeholder {
     color: #D2D2D2;
-
 }
 
 .btn-find:focus {
@@ -146,9 +146,9 @@
 }
 
 .btn-find:hover {
-    background-color: #FFC700;
-    color: white;
-    border-color: #FFC700;
+    -webkit-box-shadow: 6px 4px 0px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 6px 4px 0px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 6px 4px 0px 0px rgba(0, 0, 0, 0.75);
 }
 
 .input-find:focus {
