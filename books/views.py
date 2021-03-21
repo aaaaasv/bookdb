@@ -166,6 +166,18 @@ class BookDetailView(DetailView):
             context['rate'] = None
         return context
 
+    def post(self, request, *args, **kwargs):
+        book = Book.objects.get(pk=self.kwargs.get('pk'))
+        user = request.user
+        try:
+            rate = Rate.objects.get(book=book, user=user)
+            rate.score = request.POST.get('rating')
+            rate.save()
+        except Rate.DoesNotExist:
+            Rate.objects.create(book=book, user=user, score=request.POST.get('rating'))
+
+        return super(BookDetailView, self).get(request, *args, **kwargs)
+
 
 class AuthorDetailView(DetailView):
     model = Author
