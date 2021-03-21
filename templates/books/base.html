@@ -43,54 +43,39 @@
     }
 </style>
 {% block navbar %}
-    {#    <nav class="navbar fixed-top navbar-expand-lg navbar-{% block navbar-color %}dark{% endblock navbar-color %}">#}
-    {#        <a href="{% url 'start-page' %}" class="navbar-brand">IBDB</a>#}
-    {#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"#}
-    {#                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">#}
-    {#            <span class="navbar-toggler-icon"></span>#}
-    {#        </button>#}
-    {##}
-    {#        <div class="collapse navbar-collapse" id="navbarToggler">#}
-    {#            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">#}
-    {#                <li class="nav-item active">#}
-    {#                    <a href="{% url 'start-page' %}" class="nav-link">Home <span class="sr-only">(current)</span></a>#}
-    {#                </li>#}
-    {#                <li class="nav-item">#}
-    {#                    <a href="{% url 'topbook-list' %}" class="nav-link">#}
-    {#                        Top#}
-    {#                    </a>#}
-    {#                </li>#}
-    {#                {% if user.is_authenticated %}#}
-    {#                    <li class="nav-item">#}
-    {#                        <a href="#" class="nav-link">|</a>#}
-    {#                    </li>#}
-    {#                    <li class="nav-item ">#}
-    {#                        <a href="#" class="nav-link">#}
-    {#                            {{ user.username }}#}
-    {#                        </a>#}
-    {#                    </li>#}
-    {##}
-    {#                    <li class="nav-item">#}
-    {#                        <a href="{% url 'logout' %}" class="nav-link">Log out</a>#}
-    {#                    </li>#}
-    {#                {% else %}#}
-    {#                    <li class="nav-item">#}
-    {#                        <a href="{% url 'login' %}" class="nav-link">Log in</a>#}
-    {#                    </li>#}
-    {##}
-    {#                {% endif %}#}
-    {##}
-    {#            </ul>#}
-    {##}
-    {#            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'topbook-list' %}">#}
-    {#<div class="placeholder" data-placeholder="Search" id="searchbar-placeholder">#}
-    {#                    <input name="search-text" type="search"  class="form-control mr-sm-2"#}
-    {#                           id="searchbar">#}
-    {#</div>#}
-    {#                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-    {#            </form>#}
-    {#        </div>#}
-    {#    </nav>#}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <nav>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'books:logout' %}">Sign Out</a>
+                    {#                <a>Sign Up</a>#}
+                {% else %}
+                    <a href="{% url 'books:login' %}">Sign In</a>
+                    <a href="{% url 'books:signup' %}">Sign Up</a>
+                {% endif %}
+            </nav>
+            <form class="main-search d-flex justify-content-center align-items-center w-25" method="get"
+                  action="{% url 'books:book-list' %}">
+                <div class="search-input-container">
+                    <input class="input-find" placeholder="Search" name="search-text" type="search" id="searchbar">
+                    <div class="suggestion" id="search-suggestion">Suggestion</div>
+                </div>
+                <button class="btn-find" type="submit">
+                    Find books
+                </button>
+            </form>
+            <div class="suggest">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     class="btn-suggest-book">
+                    <rect class="frame" x="0.5" y="0.5" width="33" height="33" rx="5.5" stroke="#FFC700"/>
+
+                    <path class="plus-sign"
+                          d="M15.4492 19.3018H10V15.376H15.4492V10H19.3896V15.376H24.8389V19.3018H19.3896V24.5898H15.4492V19.3018Z"/>
+                </svg>
+                <span>Suggest</span>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

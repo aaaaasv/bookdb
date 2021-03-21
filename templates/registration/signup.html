@@ -8,27 +8,29 @@
     <div class="container h-100">
         <div class="row h-100 d-flex align-items-center">
             <div class="offset-sm-3 col-sm-6 text-center">
-                {% if form.errors %}
-                    <p> Your username and password didnt match. Please try again.</p>
+                {% if form.non_field_errors.errors %}
+                    <p>{{ form.non_field_errors.errors }}</p>
                 {% endif %}
 
                 <div class="form-frame">
-                    <form method="post" action="{% url 'books:login' %}"
+                    <form method="post" action="{% url 'books:signup' %}"
                           class="d-flex flex-column align-items-center justify-content-around auth-form">
                         {% csrf_token %}
                         <label for="username">Username</label>
                         {{ form.username }}
+                        <span class="field-error">{{ form.username.errors }}</span>
 
-                        <label for="password">Password</label>
-                        {{ form.password }}
 
-                        <input type="submit" class="btn btn-submit" value="Login"/>
+                        <label for="password1">Password</label>
+                        {{ form.password1 }}
+                        <span class="field-error">{{ form.password1.errors }}</span>
+
+                        <label for="password">Repeat Password</label>
+                        {{ form.password2 }}
+                        <span class="field-error" style="color:red">{{ form.password2.errors }}</span>
+
+                        <input type="submit" class="btn btn-submit" value="Sign Up"/>
                     </form>
-
-
-                    <a href="{% url 'books:password_reset' %}">Forgot your password?</a>
-
-
                 </div>
             </div>
         </div>

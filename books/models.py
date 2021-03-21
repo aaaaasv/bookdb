@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import Sum
 from django.contrib.auth.models import User
 
 
@@ -20,8 +20,14 @@ class Book(models.Model):
 
     cover = models.ImageField(upload_to="book_covers", default="default.png")
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
-    rating_sum = models.IntegerField(default=0)
-    rating_voters_number = models.IntegerField(default=0)
+
+    def get_rating(self):
+        rates_number = self.rate_set.all().count()
+        rates_sum = self.rate_set.aggregate(Sum('score'))['score__sum']
+        try:
+            return round(rates_sum / rates_number, 1)
+        except TypeError:
+            return ""
 
     # 0-4 = red; 4-6 = orange; 6-8 = yellow; 8-10 = green
     def get_rating_color(self):
@@ -33,25 +39,6 @@ class Book(models.Model):
             return '#b34d05'  # orange
         elif self.rating >= 0:
             return '#ff0000'  # red
-
-    def plural_form(self):
-        if self.rating_voters_number == 1:
-            return ''
-        else:
-            return 's'
-
-    def rated_or_not(self):
-        if self.rating_voters_number == 0:
-            return 'No rating available'
-        else:
-            return self.rating
-
-    def number_of_stars(self):
-        return '1' * int(self.rating)
-
-    def half_of_star(self):
-        if self.rating > int(self.rating):
-            return True
 
     class Meta:
         ordering = ['-rating']

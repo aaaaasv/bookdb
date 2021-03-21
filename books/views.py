@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from django.urls import reverse
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseNotFound
 import django.contrib.sessions
 
@@ -120,6 +122,21 @@ def TopListView(request):
     return render(request, 'books/book_list.html', context=context)
 
 
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('books:start-page')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
+
 # class TopListView(ListView):
 #     model = Book
 #     paginate_by = 250
@@ -186,39 +203,6 @@ class AuthorDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['books'] = Book.objects.filter(author=context['author'])
         return context
-
-
-def update_rating(request):
-    if request.method == 'POST':
-        form = Ratings(request.POST)
-        if form.is_valid():
-            book = Book.objects.get(id=request.POST.get("id"))
-
-            # rate = Rate(user=request.user, book=book, score=form.cleaned_data['rate'])
-            # rate.save()
-            rate, created = Rate.objects.update_or_create(
-                user=request.user, book=book, defaults={"score": form.cleaned_data['rate']}
-            )
-
-            # current_voters_number = book.rating_voters_number
-            # book.rating_voters_number = int(current_voters_number) + 1
-
-            book.rating_voters_number = len(Rate.objects.filter(book=book))
-            summ = Rate.objects.filter(book=book).aggregate(Sum('score'))
-
-            # book.rating_sum = int(book.rating_sum) + int(form.cleaned_data['rate'])
-            book.rating_sum = summ['score__sum']
-            book.save()
-
-            book.rating = book.rating_sum / book.rating_voters_number
-
-            book.save()
-
-            return HttpResponseRedirect("../book/%s" % request.POST.get("id"))
-    else:
-        form = Ratings()
-
-    # return render(request, 'books/edit.html', {'form': form, 'books': Book.objects.all()})
 
 
 from rest_framework import viewsets

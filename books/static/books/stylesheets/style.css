@@ -1,3 +1,6 @@
+body, html {
+    height:100%;
+}
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -17,14 +20,110 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #d7a700;
 }
+
 a {
     text-decoration: none;
-    color:inherit;
+    color: inherit;
 }
+
 a:hover {
     text-decoration: none;
-    color:inherit;
+    color: inherit;
 }
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:500;
+}
+
+.navbar-inner {
+    position: relative;
+    width: 100%;
+}
+
+nav {
+    background-color: #FFC700;
+    width: 20%;
+    border-radius: 0 0 50px 0;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: 800;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+nav a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.suggest {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.suggest span {
+    margin-right: 10px;
+    display: none;
+    font-weight: bold;
+}
+
+.suggest:hover span {
+    display: block;
+}
+
+.btn-suggest-book {
+
+    transition: .2s;
+    cursor: pointer;
+}
+
+.btn-suggest-book .frame {
+    fill: white;
+}
+
+.btn-suggest-book .plus-sign {
+    fill: #FFC700;
+}
+
+
+.btn-suggest-book:hover .frame {
+    fill: #FFC700;
+}
+
+.btn-suggest-book:hover .plus-sign {
+    fill: white;
+}
+
+.main-search {
+    position: absolute;
+    top: 2%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.main-search .search-input-container {
+    right: 50%;
+}
+
 
 /*@media (max-width: 740px) {*/
 /*    html,*/

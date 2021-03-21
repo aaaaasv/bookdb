@@ -1,0 +1,49 @@
+.btn-submit {
+    background-color: #FFC700;
+    border-radius: 50px;
+    width: 150px;
+    height: 35px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0;
+    color: white;
+
+}
+
+.form-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    height: 500px;
+    border: 1px solid #FFC700;
+    border-radius: 50px;
+}
+
+form input[type=text], input[type=password] {
+    border: 1px solid black;
+    border-radius: 50px;
+    outline: none;
+    height: 30px;
+    width: 200px;
+    padding: 18px 15px 18px 20px;
+}
+
+form label {
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+.field-error ul {
+    margin-top:5px;
+    padding:0;
+    list-style-type: none;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 12px;
+    color: red;
+    margin-bottom:0;
+}

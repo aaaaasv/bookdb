@@ -1,6 +1,6 @@
 {% extends 'books/base.html' %}
 
-
+{% block navbar %}{% endblock navbar %}
 {% block title %}Internet Book Database {% endblock %}
 {% block content %}
     {% load static %}
@@ -53,23 +53,23 @@
                             style="border-left: 7px solid {{ colors|get_item:forloop.counter0 }};"
                             class="img-fluid cover"
 
-{#                            {% if '//' in i.cover_picture %}#}
-{#                            src="{{ i.cover_picture }}"#}
-{#                            {% else %}#}
-{#                            src="{% static 'books/images/book_covers/'|add:i.cover_picture %}"#}
-{#                            {% endif %}#}>
+                            {#                            {% if '//' in i.cover_picture %}#}
+                            {#                            src="{{ i.cover_picture }}"#}
+                            {#                            {% else %}#}
+                            {#                            src="{% static 'books/images/book_covers/'|add:i.cover_picture %}"#}
+                            {#                            {% endif %}#}>
                 </a>
             </div>
             <div data-aos="fade-left" class="col-md-6 text-center align-self-center">
                 <h2 class="text-uppercase font-weight-bold">{{ i.title }}</h2>
                 <h1 class="book-author text-uppercase font-weight-bold">{{ i.author }}</h1>
                 <h5>
-{#                    {% for k in i.number_of_stars|make_list %}#}
-{#                        <i class="far fa-star" style="cursor:pointer"></i>#}
-{#                    {% endfor %}#}
-{#                    {% if i.half_of_star %}#}
-{#                        <i class="far fa-star-half" style="cursor:pointer"></i>#}
-{#                    {% endif %}#}
+                    {#                    {% for k in i.number_of_stars|make_list %}#}
+                    {#                        <i class="far fa-star" style="cursor:pointer"></i>#}
+                    {#                    {% endfor %}#}
+                    {#                    {% if i.half_of_star %}#}
+                    {#                        <i class="far fa-star-half" style="cursor:pointer"></i>#}
+                    {#                    {% endif %}#}
                 </h5>
             </div>
             </div>

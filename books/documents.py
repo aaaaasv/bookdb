@@ -65,8 +65,6 @@ class BookDocument(Document):
             'pub_year',
             'cover',
             'rating',
-            'rating_sum',
-            'rating_voters_number'
         ]
         related_models = [Author]
 
