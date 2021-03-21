@@ -17,26 +17,34 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #d7a700;
 }
-
-@media (max-width: 740px) {
-    html,
-    body,
-    header,
-    .view {
-        height: 100vh;
-    }
-
+a {
+    text-decoration: none;
+    color:inherit;
+}
+a:hover {
+    text-decoration: none;
+    color:inherit;
 }
 
-@media screen and (max-width: 425px) {
-    h2 {
-        font-size: 20px;
-    }
+/*@media (max-width: 740px) {*/
+/*    html,*/
+/*    body,*/
+/*    header,*/
+/*    .view {*/
+/*        height: 100vh;*/
+/*    }*/
 
-    .book-author {
-        font-size: 25px;
-    }
-}
+/*}*/
+
+/*@media screen and (max-width: 425px) {*/
+/*    h2 {*/
+/*        font-size: 20px;*/
+/*    }*/
+
+/*    .book-author {*/
+/*        font-size: 25px;*/
+/*    }*/
+/*}*/
 
 .cover {
     max-width: 33%;
@@ -131,7 +139,7 @@
     z-index: 5;
     height: 40px;
     width: 220px;
-    padding-right: 15px;
+    padding-right: 85px;
     padding-left: 20px;
     color: black;
 }

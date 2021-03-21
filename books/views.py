@@ -117,8 +117,6 @@ def TopListView(request):
             context = {
                 'object_list': filtered_books.to_queryset().all()
             }
-    context['count'] = context['object_list'].count()
-    context['colors'] = color_dictionary
     return render(request, 'books/book_list.html', context=context)
 
 

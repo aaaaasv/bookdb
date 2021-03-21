@@ -9,72 +9,83 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:600|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/list_style.css' %}">
-    <div class="d-flex flex-column align-items-center justify-content-between h-100">
 
 
-        <div class="container-fluid d-flex flex-column align-items-center h-100 mt-5">
-            <nav>
-                <a>Sign In</a>
-                <a>Sign Up</a>
-            </nav>
-            <form class="main-search d-flex justify-content-center align-items-center w-25" method="get"
-                  action="{% url 'books:book-list' %}">
-                <div class="search-input-container">
-                    <input class="input-find" placeholder="Search" name="search-text" type="search" id="searchbar">
-                    <div class="suggestion" id="search-suggestion">Suggestion</div>
-                </div>
-                <button class="btn-find" type="submit">
-                    Find books
-                </button>
-            </form>
-            <div class="suggest">
-                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     class="btn-suggest-book">
-                    <rect class="frame" x="0.5" y="0.5" width="33" height="33" rx="5.5" stroke="#FFC700"/>
-
-                    <path class="plus-sign"
-                          d="M15.4492 19.3018H10V15.376H15.4492V10H19.3896V15.376H24.8389V19.3018H19.3896V24.5898H15.4492V19.3018Z"/>
-                </svg>
-                <span>Suggest</span>
+    <div class="container-fluid d-flex flex-column align-items-center h-100 mt-5">
+        <nav>
+            <a>Sign In</a>
+            <a>Sign Up</a>
+        </nav>
+        <form class="main-search d-flex justify-content-center align-items-center w-25" method="get"
+              action="{% url 'books:book-list' %}">
+            <div class="search-input-container">
+                <input class="input-find" placeholder="Search" name="search-text" type="search" id="searchbar">
+                <div class="suggestion" id="search-suggestion">Suggestion</div>
             </div>
+            <button class="btn-find" type="submit">
+                Find books
+            </button>
+        </form>
+        <div class="suggest">
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 class="btn-suggest-book">
+                <rect class="frame" x="0.5" y="0.5" width="33" height="33" rx="5.5" stroke="#FFC700"/>
+
+                <path class="plus-sign"
+                      d="M15.4492 19.3018H10V15.376H15.4492V10H19.3896V15.376H24.8389V19.3018H19.3896V24.5898H15.4492V19.3018Z"/>
+            </svg>
+            <span>Suggest</span>
+        </div>
 
 
-            {#            <img src="{% static 'books/images/suggest.svg' %}" alt="" class="btn-suggest-book">#}
-            <div class="row w-100 book-list">
-                {% for book in object_list %}
-                    <div class="card col-10 offset-1 offset-lg-2 col-lg-8 mb-5 p-0">
-                        <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-3">
-                                    <span style="font-size: 30px; font-weight:800">{{ book.title }}</span>
-                                </div>
-                                <div class="col-2">
-                                    <span style="font-size: 25px; font-weight:300; color:#9D9D9D">{{ book.author }}</span>
-                                </div>
-                                <div class="col-2">
-                                    <span style="font-size: 25px; font-weight:300; color:#9D9D9D">{{ book.pub_year }}</span>
-                                </div>
-                                <div class="col-2">
-                                    {#                                    <img src="{% static "books/images/book_covers/shelley_frankenstein.jpg" %}" class="img-fluid" alt="" style="max-height:70%">#}
+        {#            <img src="{% static 'books/images/suggest.svg' %}" alt="" class="btn-suggest-book">#}
+        <div class="row w-100 book-list">
+            {% for book in object_list %}
+                <div class="card col-10 offset-1 offset-lg-2 col-lg-8 mb-5 p-0">
+                    <div class="card-body p-0">
+                        <img src="{% static 'books/images/info-icon.svg' %}" alt="" class="icon-info">
+
+                        <div class="row">
+                            <div class="col-3" style="position: relative">
+                                <a style="font-size: 30px; font-weight:800"
+                                   href="{% url 'books:onebook-detail' book.pk %}">{{ book.title }}</a>
+                            </div>
+                            <div class="col-2">
+                                <span style="font-size: 25px; font-weight:300; color:#9D9D9D">{{ book.author }}</span>
+                            </div>
+                            <div class="col-2">
+                                <span style="font-size: 25px; font-weight:300; color:#9D9D9D">{{ book.pub_year }}</span>
+                            </div>
+                            <div class="col-2">
+                                {#                                    <img src="{% static "books/images/book_covers/shelley_frankenstein.jpg" %}" class="img-fluid" alt="" style="max-height:70%">#}
+                                <a href="{% url 'books:onebook-detail' book.pk %}">
                                     <img src="{{ book.cover.url }}"
                                          class="img-fluid" alt="" style="max-height:70%">
-                                </div>
-                                <div class="col-3 card-rating d-flex justify-content-end">
-                                    {#                                     style="background-color: #FFC700; background-clip:content-box">#}
-                                    <div class="rate-square">
-                                        <span style="font-size: 30px; font-weight:800">7.1</span>
-                                    </div>
-                                </div>
-
-
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                {% empty %}
-                    <p>No books found for your request <b>"{{ search_text }}"</b>.</p>
-                {% endfor %}
+                            <div class="col-3 card-rating d-flex justify-content-end">
+                                {#                                     style="background-color: #FFC700; background-clip:content-box">#}
+                                <div class="rate-square">
+                                    <span style="font-size: 30px; font-weight:800">{{ book.rating }}</span>
+                                </div>
+                            </div>
 
-            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="card-extension">
+                        <span>
+                            Book description
+                    </span>
+                    </div>
+
+                </div>
+            {% endfor %}
+
         </div>
+    </div>
+
+    <script src="{% static 'books/js/book-list.js' %}"></script>
 
 {% endblock %}
