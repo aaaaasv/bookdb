@@ -22,11 +22,10 @@
                             </div>
                             <h5 class="card-title book-title">{{ book.title }}</h5>
                             <h6 class="card-title book-author text-muted">{{ book.author }}</h6>
+                            <h6 class="card-title book-author text-muted">{{ book.get_genre_list }}</h6>
+
                             <p class="card-text">
-                                Book description description description description description
-                                description description description description description description description
-                                description description description description description description description
-                                description description description
+{{ book.description }}
                             </p>
                             {% if user.is_authenticated %}
                                 <div class="card-vote">

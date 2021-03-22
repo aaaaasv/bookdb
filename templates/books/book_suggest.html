@@ -1,0 +1,28 @@
+{% extends 'books/base.html' %}
+{% block title %} Login {% endblock %}
+{% block navbar-color %}light{% endblock navbar-color %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/suggest.css' %}">
+
+    <div class="container h-100">
+        <div class="row h-100 d-flex align-items-center">
+            <div class="offset-sm-3 col-sm-6 text-center">
+                {% if form.errors %}
+                    <p> Your username and password didnt match. Please try again.</p>
+                {% endif %}
+
+                <div class="form-frame py-5">
+                    <form method="post" action="{% url 'books:suggest-new' %}"
+                          class="d-flex flex-column align-items-center justify-content-around auth-form">
+                        {% csrf_token %}
+    {{ form }}
+
+                        <input type="submit" class="btn btn-submit" value="Suggest"/>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

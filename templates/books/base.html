@@ -43,7 +43,7 @@
     }
 </style>
 {% block navbar %}
-    <div class="navbar">
+    <div class="navbar mt-2">
         <div class="navbar-inner">
             <nav>
                 {% if user.is_authenticated %}
@@ -65,14 +65,17 @@
                 </button>
             </form>
             <div class="suggest">
-                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     class="btn-suggest-book">
-                    <rect class="frame" x="0.5" y="0.5" width="33" height="33" rx="5.5" stroke="#FFC700"/>
+                <a href="{% url 'books:suggest-new' %}">
+                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"
+                         class="btn-suggest-book">
+                        <rect class="frame" x="0.5" y="0.5" width="33" height="33" rx="5.5" stroke="#FFC700"/>
 
-                    <path class="plus-sign"
-                          d="M15.4492 19.3018H10V15.376H15.4492V10H19.3896V15.376H24.8389V19.3018H19.3896V24.5898H15.4492V19.3018Z"/>
-                </svg>
+                        <path class="plus-sign"
+                              d="M15.4492 19.3018H10V15.376H15.4492V10H19.3896V15.376H24.8389V19.3018H19.3896V24.5898H15.4492V19.3018Z"/>
+                    </svg>
+                </a>
                 <span>Suggest</span>
+
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.edit import FormView, UpdateView, CreateView
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseNotFound
@@ -107,21 +107,6 @@ def book_suggester(request):
         return JsonResponse({"error": ""})
 
 
-def TopListView(request):
-    context = {
-        'object_list': Book.objects.all()
-    }
-    if request.GET and 'search-text' in request.GET:
-        from books.documents import BookDocument
-        search_text = request.GET.get('search-text')
-        filtered_books = BookDocument.search().query('wildcard', title=f'*{search_text}*')
-        if filtered_books.count() >= 1:
-            context = {
-                'object_list': filtered_books.to_queryset().all()
-            }
-    return render(request, 'books/book_list.html', context=context)
-
-
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -137,38 +122,22 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-# class TopListView(ListView):
-#     model = Book
-#     paginate_by = 250
-#     queryset = Book.objects.exclude(rating=0)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['count'] = self.get_queryset().count()
-#         context['colors'] = color_dictionary
-#
-#         return context
-#
-#     def get_queryset(self):
-#         if self.request.GET.get('search-text'):
-#             from books.documents import BookDocument
-#             search_text = self.request.GET.get('search-text')
-#             # filtered_books = BookDocument.search().query('wildcard', title=f'*{search_text}*')
-#             # if filtered_books.count() >= 1:
-#             #     return filtered_books.to_queryset().all()
-#             s = BookDocument.search()
-#             s = s.suggest(
-#                 'auto_complete',
-#                 search_text,
-#                 completion={'field': 'title.suggest'}
-#             )
-#             response = s.execute()
-#             for option in response.suggest.auto_complete[0].options:
-#                 print(option._source.title)
-#             # for option in response.suggest.auto_complete[0].options:
-#             # raise TypeError(option._source.title)
-#             return response.suggest.auto_complete[0].options
-#         return super().get_queryset()
+class TopListView(ListView):
+    model = Book
+    paginate_by = 50
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from books.documents import BookDocument
+        search_text = self.request.GET.get('search-text')
+        filtered_books = BookDocument.search().query('wildcard', title=f'*{search_text}*')
+        if filtered_books.count() >= 1:
+            context['object_list'] = filtered_books.to_queryset().all().exclude(is_public=False)
+        return context
+
+    def get_queryset(self):
+        queryset = Book.objects.exclude(is_public=False)
+        return queryset
 
 
 class BookDetailView(DetailView):
@@ -203,6 +172,19 @@ class AuthorDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['books'] = Book.objects.filter(author=context['author'])
         return context
+
+
+class BookSuggest(CreateView):
+    model = Book
+    success_url = '/'
+    template_name = "books/book_suggest.html"
+    fields = (
+        'title',
+        'author',
+        'pub_year',
+        'description',
+        'genres'
+    )
 
 
 from rest_framework import viewsets

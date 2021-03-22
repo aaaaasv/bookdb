@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import SimpleRouter
-
+from django.contrib.auth.decorators import login_required
 from . import views
 
 router = SimpleRouter()
@@ -17,9 +17,10 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.startpage, name='start-page'),
+    path('suggest/', login_required(views.BookSuggest.as_view()), name='suggest-new'),
     path('edit', views.edit),
     path('create/', views.create),
-    path('top/', views.TopListView, name='book-list'),
+    path('top/', views.TopListView.as_view(), name='book-list'),
     path('book/<int:pk>/', views.BookDetailView.as_view(), name='onebook-detail'),
     path('author/<int:pk>/', views.AuthorDetailView.as_view(), name='author-detail'),
     path('api/', include(router.urls)),

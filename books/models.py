@@ -13,13 +13,26 @@ class Author(models.Model):
         ordering = ['name']
 
 
+class Genre(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+# class PublishingHouse(models.Model):
+#     name = models.CharField(max_length=150)
+
 class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     pub_year = models.IntegerField(default=0)
-
+    description = models.TextField(null=True)
     cover = models.ImageField(upload_to="book_covers", default="default.png")
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+    genres = models.ManyToManyField(Genre)
+
+    is_public = models.BooleanField(default=False)
 
     def get_rating(self):
         rates_number = self.rate_set.all().count()
@@ -28,6 +41,9 @@ class Book(models.Model):
             return round(rates_sum / rates_number, 1)
         except TypeError:
             return ""
+
+    def get_genre_list(self):
+        return ', '.join(self.genres.all().values_list('name', flat=True))
 
     # 0-4 = red; 4-6 = orange; 6-8 = yellow; 8-10 = green
     def get_rating_color(self):
