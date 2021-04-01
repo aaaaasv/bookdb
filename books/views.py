@@ -16,7 +16,7 @@ import random
 from django.db.models import Sum
 
 from django.contrib.auth.models import User
-from .models import Book, Author, Rate
+from .models import Book, Author, Rate, Review
 from .forms import BookForm, Ratings
 
 color_dictionary = {0: '#AF9500;', 1: '#B4B4B4', 2: '#AD8A56'}  # gold, silver and bronze
@@ -146,10 +146,7 @@ class BookDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = Ratings()
-        try:
-            context['rate'] = Rate.objects.get(user=self.request.user, book=self.object)
-        except:
-            context['rate'] = None
+        context['review_list'] = Review.objects.all().filter(book_id=self.kwargs.get('pk'))
         return context
 
     def post(self, request, *args, **kwargs):

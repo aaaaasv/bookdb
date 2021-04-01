@@ -75,3 +75,10 @@ class Rate(models.Model):
 
     def __str__(self):
         return "%s : %s(%s)" % (self.user, self.book.title, self.score)
+
+
+class Review(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    text = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)

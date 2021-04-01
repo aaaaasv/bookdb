@@ -2,12 +2,11 @@
 
 {% block content %}
     {% load static %}
+    {% load tz %}
     <link rel="stylesheet" type="text/css" href="{% static 'books/stylesheets/detail-style.css' %}">
     <div class="container-fluid h-100">
         <div class="row">
             <div class="col-sm-12">
-
-
                 <form class="d-flex justify-content-center" action="{% url 'books:onebook-detail' book.pk %}"
                       method="post">
                     {% csrf_token %}
@@ -25,7 +24,7 @@
                             <h6 class="card-title book-author text-muted">{{ book.get_genre_list }}</h6>
 
                             <p class="card-text">
-{{ book.description }}
+                                {{ book.description }}
                             </p>
                             {% if user.is_authenticated %}
                                 <div class="card-vote">
@@ -45,6 +44,25 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-sm-12 d-flex justify-content-around align-items-center">
+                {% for review in review_list %}
+                    <div class="review">
+                        <div class="user text-muted">
+                            {{ review.user.username }}
+                        </div>
+
+                        <div class="date text-muted">
+                            {% timezone "Europe/Kiev" %}
+                                {{ review.date|localtime }}
+                            {% endtimezone %}
+                        </div>
+
+                        {{ review.text }}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

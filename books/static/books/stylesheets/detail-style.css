@@ -31,14 +31,14 @@ body, html {
     background-color: #FFC700;
     z-index: -10;
     text-align: right;
-    padding-right:20px;
+    padding-right: 20px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     border-radius: 30px;
     font-weight: 800;
-    font-size:20px;
-    color:white;
+    font-size: 20px;
+    color: white;
 
 }
 
@@ -59,7 +59,7 @@ body, html {
 
 .card .card-text {
     margin-top: 50px;
-    margin-bottom:70px;
+    margin-bottom: 70px;
     font-size: 20px;
     font-weight: 300;
 }
@@ -128,4 +128,33 @@ body, html {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display: block;
+}
+
+.review {
+    margin-top: 200px;
+    width: 80%;
+    min-height: 200px;
+    padding: 50px;
+    border: 1px solid black;
+    border-radius: 50px;
+    position: relative;
+}
+
+.review .date {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+}
+.review .user {
+    position: absolute;
+    top:20px;
+    left:40px;
+}
+.review .review-rating {
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    top:20px;
 }
